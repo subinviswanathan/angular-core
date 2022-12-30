@@ -1,0 +1,44 @@
+<h3>Reactive Forms</h3>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit($event, form)"
+  class="form-background"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Email"
+      type="email"
+      name="email"
+      formControlName="email"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      name="password"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <!-- <mat-error *ngIf="password?.errors?.['passwordStrength']"
+      >Must have validaid password</mat-error
+    > -->
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="date"
+      name="date"
+      placeholder="Date"
+      formControlName="date"
+    />
+  </mat-form-field>
+
+  <button color="primary" mat-raised-button type="submit">Login</button>
+</form>

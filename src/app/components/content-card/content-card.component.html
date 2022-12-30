@@ -1,0 +1,39 @@
+<!-- <div *ngIf="course" class="content-card">
+  <h1>{{ course.name }}</h1>
+  <ng-content select=".desc"></ng-content>
+  <span>{{ course.type }}</span>
+  <div *ngIf="course.image; else blankRef"></div>
+
+  <button #view (click)="viewCourse()">View</button>
+</div> -->
+
+<ng-template [ngIf]="course" let-course>
+  <div class="content-card">
+    <h1>{{ course.name }}</h1>
+    <ng-content select=".desc"></ng-content>
+    <span>{{ course.type }}</span>
+    <div *ngIf="course.image; else blankRef"></div>
+    <course-image *ngxUnless="!course.image"></course-image>
+    <hr />
+    Edit course
+    <input
+      type="text"
+      #descRef
+      [value]="course?.description"
+      (keyup)="descChanged(descRef.value)"
+    />
+
+    <button #view (click)="viewCourse()">View</button>
+  </div>
+</ng-template>
+
+<ng-template #blankRef>
+  <ng-container *ngIf="blank">
+    <ng-container
+      *ngTemplateOutlet="
+        blank;
+        context: { desc: course?.description, this: this }
+      "
+    ></ng-container>
+  </ng-container>
+</ng-template>

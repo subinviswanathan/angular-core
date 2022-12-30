@@ -1,0 +1,41 @@
+<div style="display: flex; flex-direction: column" [formGroup]="form">
+  <mat-radio-group formControlName="courseType">
+    <mat-radio-button value="free">Free</mat-radio-button>
+    <mat-radio-button value="premium">Premium</mat-radio-button>
+  </mat-radio-group>
+
+  <app-file-upload
+    requiredFileType="image/png"
+    formControlName="fileUpload"
+  ></app-file-upload>
+
+  <mat-form-field>
+    <input formControlName="price" placeholder="Price" type="number" matInput />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Promotion Period</mat-label>
+
+    <mat-date-range-input [rangePicker]="pormotionPicker">
+      <input
+        placeholder="Start Date"
+        matStartDate
+        formControlName="promoStartAt"
+      />
+      <input placeholder="End Date" matEndDate formControlName="promoEndAt" />
+    </mat-date-range-input>
+
+    <mat-error *ngIf="form.errors?.['promoPeriod'] && form.dirty"
+      >End date is less</mat-error
+    >
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="pormotionPicker"
+    ></mat-datepicker-toggle>
+    <mat-date-range-picker #pormotionPicker></mat-date-range-picker>
+  </mat-form-field>
+
+  <div>
+    {{ form.value | json }}
+  </div>
+</div>

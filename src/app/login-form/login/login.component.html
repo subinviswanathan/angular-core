@@ -1,0 +1,77 @@
+<button (click)="reactive = !reactive">Toggle Reactive</button>
+<button [routerLink]="['/create']">Create</button>
+
+<form
+  #form="ngForm"
+  (ngSubmit)="onSubmit($event, form)"
+  class="form-background mat-elevations-z5"
+  *ngIf="!reactive"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Email"
+      type="email"
+      [ngModel]="val.email"
+      #email="ngModel"
+      name="email"
+      email
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      #password="ngModel"
+      [ngModel]="val.password"
+      name="password"
+      placeholder="Password"
+      required
+      passwordStrength
+      (ngModelChange)="modelChange($event)"
+      minlength="6"
+    />
+    <!-- <mat-error *ngIf="password?.errors?.['passwordStrength']"
+      >Must have validaid password</mat-error
+    > -->
+  </mat-form-field>
+
+  <div
+    class="subin"
+    *ngIf="
+      password?.errors
+        | onlySingleError : ['minlength', 'passwordStrength'] as error
+    "
+  >
+    <div *ngIf="error.passwordStrength">Password</div>
+    <div *ngIf="error.minlength">Min Length</div>
+  </div>
+
+  <mat-form-field *ngIf="val.date" class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="date"
+      #date="ngModel"
+      [ngModel]="val.date"
+      name="date"
+      placeholder="Date"
+      required
+    />
+  </mat-form-field>
+
+  <button
+    [disabled]="!form.valid"
+    color="primary"
+    mat-raised-button
+    type="submit"
+  >
+    Login
+  </button>
+</form>
+
+<app-login-reactive *ngIf="reactive"></app-login-reactive>

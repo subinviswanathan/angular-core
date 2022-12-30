@@ -1,0 +1,23 @@
+<input
+  type="file"
+  style="display: none"
+  #fileUpload
+  (change)="onFileSelected($event)"
+/>
+
+<div>
+  <mat-form-field>
+    <input matInput [disabled]="true" [value]="fileName" />
+  </mat-form-field>
+
+  <button mat-mini-fab (click)="fileUpload.click()">
+    <mat-icon>attach_file</mat-icon>
+  </button>
+</div>
+
+<mat-progress-bar
+  class="progress-bar"
+  *ngIf="uploadProgress"
+  mode="determinate"
+  [value]="uploadProgress"
+></mat-progress-bar>
